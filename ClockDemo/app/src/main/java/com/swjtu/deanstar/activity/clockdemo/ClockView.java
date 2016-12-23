@@ -9,11 +9,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Picture;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.io.InputStream;
 import java.util.Calendar;
-import java.util.Date;
+
 
 
 /**
@@ -62,6 +64,7 @@ public class ClockView extends View implements Runnable{
         super.onDraw(canvas);
         if(!isInited){
             canvas.drawCircle(mWidth/2,mHight/2,(mWidth-mOutterLineWidth*2)/2,mOutterPaint);//画表框
+            canvas.translate(0,0);
             canvas.translate(mWidth/2,mHight/2+mOutterLineWidth);
             canvas.drawCircle(0,-mOutterLineWidth,mCenterBlackCircleSize,mCenterBlackCirclePaint);
             canvas.drawCircle(0,-mOutterLineWidth,mCenterYellowCircleSize,mCenterYellowCirclePaint);
@@ -91,7 +94,6 @@ public class ClockView extends View implements Runnable{
         float hourEndY = mHourLineLen *(float)Math.sin((270+(hour%12)*30+minute/60.0*30)/180.0*Math.PI);
         float minuteEndX = mMinuteLineLen *(float)Math.cos((270+minute*6)/180.0*Math.PI);
         float minuteEndY = mMinuteLineLen *(float)Math.sin((270+minute*6)/180.0*Math.PI);
-
         canvas.drawLine(0,-mOutterLineWidth,minuteEndX,minuteEndY,mCenterBlackCirclePaint);
         canvas.drawLine(0,-mOutterLineWidth,hourEndX,hourEndY,mCenterBlackCirclePaint);
         //画秒针
